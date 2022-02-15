@@ -17,6 +17,7 @@ public class Uptake extends SubsystemBase
   public Uptake() 
   {
     uptake = new WPI_VictorSPX(Constants.uptake);
+    uptake.setInverted(true);
   }
 
   @Override

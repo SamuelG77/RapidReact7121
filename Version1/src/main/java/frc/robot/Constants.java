@@ -33,16 +33,16 @@ public final class Constants
     public static final int rightFront = 6;
     public static final int rightFollow = 7;
     public static final int leftFront = 4;
-    public static final int leftFollow =5;
-    public static final int lowerFlyWheel = 2;
-    public static final int upperFlyWheel = 3;
+    public static final int leftFollow = 5;
+    public static final int lowerFlyWheel = 3;
+    public static final int upperFlyWheel = 2;
     //victorSPX
     public static final int uptake = 1;
     public static final int intake = 0;
 
     /*****************OTHER*****************/
     public static final double uptakeSpeed = .25;
-    public static final double intakeSpeed = .25;
+    public static final double intakeSpeed = .50;
     public static final double kp = .025;
     public static final double minCommand = .03;
     public static final double kd = .05;

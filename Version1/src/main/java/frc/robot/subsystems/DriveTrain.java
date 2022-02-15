@@ -4,11 +4,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Timer;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase 
 {
@@ -20,10 +25,15 @@ public class DriveTrain extends SubsystemBase
   private MotorControllerGroup leftSide;
 
   private boolean isInverted;
+  private Timer timer;
 
   public DriveTrain() 
   {
     isInverted = true;
+    timer = new Timer();
+    timer.reset();
+    timer.start();
+    
 
     rightFront = new WPI_TalonFX(Constants.rightFront);
     rightFollow = new WPI_TalonFX(Constants.rightFollow);
@@ -31,8 +41,9 @@ public class DriveTrain extends SubsystemBase
     leftFollow = new WPI_TalonFX(Constants.leftFollow);
 
     rightSide = new MotorControllerGroup(rightFront, rightFollow);
-    rightSide.setInverted(isInverted);
+    rightSide.setInverted(true);
     leftSide = new MotorControllerGroup(leftFront, leftFollow);
+
   }
 
   @Override
@@ -48,9 +59,42 @@ public class DriveTrain extends SubsystemBase
 
   public void Inverte()
   {
-    isInverted = !isInverted;
-    rightSide.setInverted(isInverted);
-    rightSide.setInverted(!isInverted);
-
+    
+    if(timer.get() > .5)
+    {
+      isInverted = !isInverted;
+      timer.reset();
+      timer.start();
+    }
   }
+
+  public void Drive()
+  {
+    double x = RobotContainer.driver.getRawAxis(Constants.rightX);
+    double y = RobotContainer.driver.getRawAxis(Constants.rightY);
+    double lSpeed = y - x;
+    double rSpeed = y + x;
+    double invertRSpeed = -(y - x);
+    double invertLSpeed = -(y + x);
+    boolean drive = false;
+
+    if(rSpeed >.02 || lSpeed > .02 || rSpeed < -.02 || lSpeed < -.02 )
+      drive = true;
+    else
+    {
+      setSpeed(0, 0);
+      drive = false;
+    }
+
+    if(drive && isInverted)
+    {
+      setSpeed(invertLSpeed, invertRSpeed);
+    }
+    else if(drive)
+    {
+      setSpeed(lSpeed, rSpeed);
+    }
+  }
+
+  
 }

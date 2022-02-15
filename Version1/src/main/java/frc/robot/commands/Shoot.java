@@ -10,9 +10,14 @@ import frc.robot.subsystems.Shooter;
 public class Shoot extends CommandBase {
   /** Creates a new Shoot. */
   private Shooter shooter;
-  public Shoot(Shooter shot) 
+  private double uSpeed;
+  private double lSpeed;
+  
+  public Shoot(Shooter shot,double us, double ls) 
   {
     shooter = shot;
+    uSpeed = us;
+    lSpeed = ls;
     addRequirements(shooter);
   }
 
@@ -24,7 +29,7 @@ public class Shoot extends CommandBase {
   @Override
   public void execute() 
   {
-    shooter.Shoot(.5, .5);
+    shooter.Shoot(uSpeed, lSpeed);
   }
 
   // Called once the command ends or is interrupted.

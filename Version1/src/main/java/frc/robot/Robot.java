@@ -81,7 +81,13 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() 
+  {
+    if(RobotContainer.driver.getRawButton(Constants.aButton))
+    {
+      RobotContainer.driveTrain.Inverte();
+    }
+  }
 
   @Override
   public void testInit() {

@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,11 +28,12 @@ import frc.robot.subsystems.Uptake;
  */
 public class RobotContainer 
 {
-  private Joystick driver;
+  public static Joystick driver;
+  private Timer timer;
 
   //subsystems
   private Shooter shooter;
-  private DriveTrain driveTrain;
+  public static DriveTrain driveTrain;
   private Uptake uptake;
   private Intake intake;
 
@@ -40,6 +43,8 @@ public class RobotContainer
   public RobotContainer() 
   {
     driver = new Joystick(0);
+    timer = new Timer();
+    timer.reset();
 
     shooter = new Shooter();
     driveTrain = new DriveTrain();
@@ -51,6 +56,8 @@ public class RobotContainer
     driveTrain.setDefaultCommand(drive);
 
     configureButtonBindings();
+
+    
   }
 
   /**
@@ -64,7 +71,7 @@ public class RobotContainer
 
     //shoot
     JoystickButton xButton = new JoystickButton(driver, Constants.xButton);
-    xButton.whileHeld(new Shoot(shooter));
+    xButton.whileHeld(new Shoot(shooter, .32, .32));
 
     //uptake
     JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
@@ -72,6 +79,7 @@ public class RobotContainer
 
     JoystickButton lbButton = new JoystickButton(driver, Constants.lbButton);
     lbButton.whileHeld(new RunUptake(uptake, -Constants.uptakeSpeed));
+
     
     //intake
     JoystickButton rtButton = new JoystickButton(driver, Constants.rtButton);
@@ -79,6 +87,9 @@ public class RobotContainer
 
     JoystickButton ltButton = new JoystickButton(driver, Constants.ltButton);
     ltButton.whileHeld(new RunIntake(intake, -Constants.intakeSpeed));
+    
+    
+    
 
   }
 

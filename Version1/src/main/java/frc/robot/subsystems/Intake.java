@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase 
 {
   private WPI_VictorSPX motor;
+
   public Intake() 
   {
     motor = new WPI_VictorSPX(Constants.intake);
@@ -26,4 +29,6 @@ public class Intake extends SubsystemBase
   {
     motor.set(speed);
   }
+
+
 }

@@ -29,12 +29,7 @@ public class ArcadeDrive extends CommandBase
   @Override
   public void execute() 
   {
-    double x = joystick.getRawAxis(Constants.rightX);
-    double y = joystick.getRawAxis(Constants.rightY);
-    double lSpeed = y + x;
-    double rSpeed = y - x;
-
-    driveTrain.setSpeed(lSpeed, rSpeed);
+    driveTrain.Drive();
   }
 
   // Called once the command ends or is interrupted.
