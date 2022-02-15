@@ -7,12 +7,14 @@ package frc.robot;
 
 public final class Constants 
 {
-    //Joystick map
+    /*****************Joystick map*****************/
     public static final int driverJoystick = 0;
+    //axis
     public static final int leftX = 0;
     public static final int leftY = 1;
     public static final int rightX = 2;
     public static final int rightY = 3;
+    //buttons
     public static final int xButton = 1;
     public static final int aButton = 2;
     public static final int bButton = 3;
