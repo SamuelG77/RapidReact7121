@@ -18,6 +18,7 @@ public class Shooter extends SubsystemBase
   {
     upperFly = new WPI_TalonFX(Constants.upperFlyWheel);
     lowerFly = new WPI_TalonFX(Constants.lowerFlyWheel);
+    upperFly.setInverted(true);
   }
 
   @Override

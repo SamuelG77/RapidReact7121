@@ -42,7 +42,7 @@ public final class Constants
 
     /*****************OTHER*****************/
     public static final double uptakeSpeed = .25;
-    public static final double intakeSpeed = .5;
+    public static final double intakeSpeed = .25;
     public static final double kp = .025;
     public static final double minCommand = .03;
     public static final double kd = .05;

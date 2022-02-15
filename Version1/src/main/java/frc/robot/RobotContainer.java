@@ -44,6 +44,7 @@ public class RobotContainer
     shooter = new Shooter();
     driveTrain = new DriveTrain();
     intake = new Intake();
+    uptake = new Uptake();
 
     drive = new ArcadeDrive(driveTrain, driver);
 
@@ -77,7 +78,7 @@ public class RobotContainer
     rtButton.whileHeld(new RunIntake(intake, Constants.intakeSpeed));
 
     JoystickButton ltButton = new JoystickButton(driver, Constants.ltButton);
-    ltButton.whileHeld(new RunUptake(uptake, -Constants.intakeSpeed));
+    ltButton.whileHeld(new RunIntake(intake, -Constants.intakeSpeed));
 
   }
 

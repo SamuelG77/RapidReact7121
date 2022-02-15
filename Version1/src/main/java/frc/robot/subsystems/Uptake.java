@@ -9,21 +9,24 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Uptake extends SubsystemBase {
+public class Uptake extends SubsystemBase 
+{
   /** Creates a new Uptake. */
-  private WPI_VictorSPX motor;
+  private WPI_VictorSPX uptake;
+
   public Uptake() 
   {
-    motor = new WPI_VictorSPX(Constants.uptake);
+    uptake = new WPI_VictorSPX(Constants.uptake);
   }
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     // This method will be called once per scheduler run
   }
 
   public void setSpeed(double speed)
   {
-    motor.set(speed);
+    uptake.set(speed);
   }
 }

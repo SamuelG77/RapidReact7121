@@ -11,6 +11,7 @@ public class RunIntake extends CommandBase
 {
   private Intake intake;
   private double speed;
+  
   public RunIntake(Intake in, double s) 
   {
     intake = in;

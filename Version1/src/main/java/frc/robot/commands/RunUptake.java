@@ -9,15 +9,15 @@ import frc.robot.subsystems.Uptake;
 
 public class RunUptake extends CommandBase 
 {
-
   private Uptake uptake;
   private double speed;
-
-  public RunUptake(Uptake up, double speed)
+  
+  public RunUptake(Uptake up, double s) 
   {
     uptake = up;
-    this.speed = speed;
+    speed = s;
     addRequirements(uptake);
+
   }
 
   // Called when the command is initially scheduled.
