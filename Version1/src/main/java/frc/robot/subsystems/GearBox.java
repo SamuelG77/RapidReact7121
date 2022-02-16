@@ -4,18 +4,17 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
-public class Intake extends SubsystemBase 
+public class GearBox extends SubsystemBase 
 {
-  private WPI_VictorSPX motor;
-
-  public Intake() 
+  private DoubleSolenoid gearBox;
+  public GearBox() 
   {
-    motor = new WPI_VictorSPX(Constants.intake);
+    gearBox = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,0,1);
+    gearBox.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
@@ -23,10 +22,8 @@ public class Intake extends SubsystemBase
     // This method will be called once per scheduler run
   }
 
-  public void setSpeed(double speed)
+  public void Toggle()
   {
-    motor.set(speed);
+    gearBox.toggle();
   }
-
-
 }

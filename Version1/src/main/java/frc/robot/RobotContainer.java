@@ -16,7 +16,9 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunUptake;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Uptake;
 
@@ -33,6 +35,8 @@ public class RobotContainer
 
   //subsystems
   private Shooter shooter;
+  public static Lift lift;
+  public static GearBox gearBox;
   public static DriveTrain driveTrain;
   private Uptake uptake;
   private Intake intake;
@@ -50,8 +54,10 @@ public class RobotContainer
     driveTrain = new DriveTrain();
     intake = new Intake();
     uptake = new Uptake();
+    lift = new Lift();
+    gearBox = new GearBox();
 
-    drive = new ArcadeDrive(driveTrain, driver);
+    drive = new ArcadeDrive(driveTrain);
 
     driveTrain.setDefaultCommand(drive);
 
@@ -71,7 +77,7 @@ public class RobotContainer
 
     //shoot
     JoystickButton xButton = new JoystickButton(driver, Constants.xButton);
-    xButton.whileHeld(new Shoot(shooter, .32, .32));
+    xButton.whileHeld(new Shoot(shooter, 1, 1));
 
     //uptake
     JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
@@ -87,10 +93,13 @@ public class RobotContainer
 
     JoystickButton ltButton = new JoystickButton(driver, Constants.ltButton);
     ltButton.whileHeld(new RunIntake(intake, -Constants.intakeSpeed));
-    
-    
-    
 
+    // JoystickButton bButton = new JoystickButton(driver, Constants.bButton);
+    // bButton.whenPressed(new ActivateLiftUp(lift));
+
+    // JoystickButton yButton = new JoystickButton(driver, Constants.yButton);
+    // yButton.whenPressed(new ActivateLiftDown(lift));
+    
   }
 
   /**

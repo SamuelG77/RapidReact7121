@@ -87,6 +87,16 @@ public class Robot extends TimedRobot {
     {
       RobotContainer.driveTrain.Inverte();
     }
+
+    if(RobotContainer.driver.getRawButton(Constants.yButton))
+    {
+      RobotContainer.lift.Toggle();
+    }
+
+    if(RobotContainer.driver.getRawButton(Constants.bButton))
+    {
+      RobotContainer.gearBox.Toggle();
+    }
   }
 
   @Override
