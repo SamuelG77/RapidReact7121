@@ -83,23 +83,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() 
   {
-
-    //change which side is the front
     if(RobotContainer.driver.getRawButton(Constants.aButton))
     {
       RobotContainer.driveTrain.Inverte();
-    }
-
-    //deploy/retract intake
-    if(RobotContainer.driver.getRawButton(Constants.yButton))
-    {
-      RobotContainer.lift.Toggle();
-    }
-
-    //shift
-    if(RobotContainer.driver.getRawButton(Constants.bButton))
-    {
-      RobotContainer.gearBox.Toggle();
     }
   }
 

@@ -30,6 +30,8 @@ import frc.robot.subsystems.Uptake;
  */
 public class RobotContainer 
 {
+
+  //other
   public static Joystick driver;
   private Timer timer;
 
@@ -46,10 +48,13 @@ public class RobotContainer
 
   public RobotContainer() 
   {
+
+    //other
     driver = new Joystick(0);
     timer = new Timer();
     timer.reset();
 
+    //subsytems
     shooter = new Shooter();
     driveTrain = new DriveTrain();
     intake = new Intake();
@@ -57,8 +62,10 @@ public class RobotContainer
     lift = new Lift();
     gearBox = new GearBox();
 
+    //commands
     drive = new ArcadeDrive(driveTrain);
 
+    //default commands
     driveTrain.setDefaultCommand(drive);
 
     configureButtonBindings();
@@ -94,11 +101,6 @@ public class RobotContainer
     JoystickButton ltButton = new JoystickButton(driver, Constants.ltButton);
     ltButton.whileHeld(new RunIntake(intake, -Constants.intakeSpeed));
 
-    // JoystickButton bButton = new JoystickButton(driver, Constants.bButton);
-    // bButton.whenPressed(new ActivateLiftUp(lift));
-
-    // JoystickButton yButton = new JoystickButton(driver, Constants.yButton);
-    // yButton.whenPressed(new ActivateLiftDown(lift));
     
   }
 

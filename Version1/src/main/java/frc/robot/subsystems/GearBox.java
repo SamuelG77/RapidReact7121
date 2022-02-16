@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class GearBox extends SubsystemBase 
 {
   private DoubleSolenoid gearBox;
+  
   public GearBox() 
   {
     gearBox = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,0,1);
