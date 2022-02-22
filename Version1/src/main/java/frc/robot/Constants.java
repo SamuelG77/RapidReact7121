@@ -9,6 +9,7 @@ public final class Constants
 {
     /*****************Joystick map*****************/
     public static final int driverJoystick = 0;
+    public static final int shooterJoystick = 1;
     //axis
     public static final int leftX = 0;
     public static final int leftY = 1;

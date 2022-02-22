@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.Center;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunUptake;
 import frc.robot.commands.Shoot;
@@ -19,6 +21,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Uptake;
 
@@ -33,6 +36,7 @@ public class RobotContainer
 
   //other
   public static Joystick driver;
+  public static Joystick shootJoystick;
   private Timer timer;
 
   //subsystems
@@ -42,6 +46,7 @@ public class RobotContainer
   public static DriveTrain driveTrain;
   private Uptake uptake;
   private Intake intake;
+  private Limelight limelight;
 
   //commands
   private ArcadeDrive drive;
@@ -50,7 +55,8 @@ public class RobotContainer
   {
 
     //other
-    driver = new Joystick(0);
+    driver = new Joystick(Constants.driverJoystick);
+    shootJoystick = new Joystick(Constants.shooterJoystick);
     timer = new Timer();
     timer.reset();
 
@@ -61,12 +67,16 @@ public class RobotContainer
     uptake = new Uptake();
     lift = new Lift();
     gearBox = new GearBox();
+    limelight = new Limelight();
 
     //commands
     drive = new ArcadeDrive(driveTrain);
 
     //default commands
     driveTrain.setDefaultCommand(drive);
+
+    SmartDashboard.getEntry("stream");
+
 
     configureButtonBindings();
 
@@ -82,9 +92,20 @@ public class RobotContainer
   private void configureButtonBindings() 
   {
 
-    //shoot
-    JoystickButton xButton = new JoystickButton(driver, Constants.xButton);
-    xButton.whileHeld(new Shoot(shooter, 1, 1));
+    //shoot (shooter joystick)
+    JoystickButton aButton = new JoystickButton(shootJoystick, Constants.aButton);
+    aButton.whileHeld(new Shoot(shooter, .32, .32));
+
+    JoystickButton bButton = new JoystickButton(shootJoystick, Constants.bButton);
+    bButton.whileHeld(new Shoot(shooter, .42, .42));
+
+    JoystickButton yButton = new JoystickButton(shootJoystick, Constants.yButton);
+    yButton.whileHeld(new Shoot(shooter, .6, .6));
+
+    //limelight
+    JoystickButton xButton = new JoystickButton(shootJoystick, Constants.xButton);
+    xButton.whileHeld(new Center(limelight, driveTrain));
+
 
     //uptake
     JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);

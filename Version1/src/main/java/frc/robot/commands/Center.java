@@ -54,7 +54,8 @@ public class Center extends CommandBase
     motorSpeed -= steering_adjust;
     motorSpeed = motorSpeed/2;
     
-    driveTrain.setSpeed(motorSpeed, -motorSpeed);
+    driveTrain.setSpeed(-motorSpeed, motorSpeed);
+    System.out.println(x);
 
   }
 
