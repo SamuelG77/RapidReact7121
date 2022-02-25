@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Center;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunUptake;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.Autonomous.AutoOne;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Intake;
@@ -40,16 +42,17 @@ public class RobotContainer
   private Timer timer;
 
   //subsystems
-  private Shooter shooter;
+  public static Shooter shooter;
   public static Lift lift;
   public static GearBox gearBox;
   public static DriveTrain driveTrain;
-  private Uptake uptake;
-  private Intake intake;
-  private Limelight limelight;
+  public static Uptake uptake;
+  public static Intake intake;
+  public static Limelight limelight;
 
   //commands
   private ArcadeDrive drive;
+  private AutoOne auto;
 
   public RobotContainer() 
   {
@@ -71,11 +74,11 @@ public class RobotContainer
 
     //commands
     drive = new ArcadeDrive(driveTrain);
+    auto = new AutoOne();
 
     //default commands
     driveTrain.setDefaultCommand(drive);
 
-    //camera
     SmartDashboard.getEntry("stream");
 
 
@@ -94,26 +97,32 @@ public class RobotContainer
   {
 
     //shoot (shooter joystick)
-    JoystickButton aButton = new JoystickButton(shootJoystick, Constants.aButton);
-    aButton.whileHeld(new Shoot(shooter, .32, .32));
+    JoystickButton xButtonS = new JoystickButton(shootJoystick, Constants.xButton);
+    xButtonS.whileHeld(new Shoot(shooter, Constants.lowSpeedShoot, Constants.lowSpeedShoot));
 
-    JoystickButton bButton = new JoystickButton(shootJoystick, Constants.bButton);
-    bButton.whileHeld(new Shoot(shooter, .42, .42));
+    JoystickButton bButtonS = new JoystickButton(shootJoystick, Constants.bButton);
+    bButtonS.whileHeld(new Shoot(shooter, Constants.midSpeedShoot, Constants.midSpeedShoot));
 
-    JoystickButton yButton = new JoystickButton(shootJoystick, Constants.yButton);
-    yButton.whileHeld(new Shoot(shooter, .6, .6));
+    JoystickButton yButtonS = new JoystickButton(shootJoystick, Constants.yButton);
+    yButtonS.whileHeld(new Shoot(shooter, Constants.highSpeedShoot, Constants.highSpeedShoot));
+
+    JoystickButton aButtonS = new JoystickButton(shootJoystick, Constants.aButton);
+    aButtonS.whileHeld(new Shoot(shooter, Constants.onePointUpper, Constants.onePointLower));
+
+    JoystickButton l3ButtonS = new JoystickButton(shootJoystick, Constants.l3Button);
+    l3ButtonS.whileHeld(new AutoShoot(limelight, shooter));
 
     //limelight
-    JoystickButton xButton = new JoystickButton(shootJoystick, Constants.xButton);
-    xButton.whileHeld(new Center(limelight, driveTrain));
+    JoystickButton ltButtonS = new JoystickButton(shootJoystick, Constants.ltButton);
+    ltButtonS.whileHeld(new Center(limelight, driveTrain));
 
 
     //uptake
-    JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
-    rbButton.whileHeld(new RunUptake(uptake, Constants.uptakeSpeed));
+    JoystickButton rbButtonS = new JoystickButton(shootJoystick, Constants.rbButton);
+    rbButtonS.whileHeld(new RunUptake(uptake, Constants.uptakeSpeed));
 
-    JoystickButton lbButton = new JoystickButton(driver, Constants.lbButton);
-    lbButton.whileHeld(new RunUptake(uptake, -Constants.uptakeSpeed));
+    JoystickButton rtButtonS = new JoystickButton(shootJoystick, Constants.lbButton);
+    rtButtonS.whileHeld(new RunUptake(uptake, -Constants.uptakeSpeed));
 
     
     //intake
@@ -133,6 +142,6 @@ public class RobotContainer
    */
   public Command getAutonomousCommand() 
   {
-    return null;
+    return auto;
   }
 }
