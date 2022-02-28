@@ -15,10 +15,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Center;
+import frc.robot.commands.Climb;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunUptake;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Autonomous.AutoOne;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Intake;
@@ -49,6 +51,7 @@ public class RobotContainer
   public static Uptake uptake;
   public static Intake intake;
   public static Limelight limelight;
+  public static Climber climber;
 
   //commands
   private ArcadeDrive drive;
@@ -109,8 +112,8 @@ public class RobotContainer
     JoystickButton aButtonS = new JoystickButton(shootJoystick, Constants.aButton);
     aButtonS.whileHeld(new Shoot(shooter, Constants.onePointUpper, Constants.onePointLower));
 
-    JoystickButton l3ButtonS = new JoystickButton(shootJoystick, Constants.l3Button);
-    l3ButtonS.whileHeld(new AutoShoot(limelight, shooter));
+    JoystickButton r3ButtonS = new JoystickButton(shootJoystick, Constants.r3Button);
+    r3ButtonS.whileHeld(new AutoShoot(limelight, shooter));
 
     //limelight
     JoystickButton ltButtonS = new JoystickButton(shootJoystick, Constants.ltButton);
@@ -121,7 +124,7 @@ public class RobotContainer
     JoystickButton rbButtonS = new JoystickButton(shootJoystick, Constants.rbButton);
     rbButtonS.whileHeld(new RunUptake(uptake, Constants.uptakeSpeed));
 
-    JoystickButton rtButtonS = new JoystickButton(shootJoystick, Constants.lbButton);
+    JoystickButton rtButtonS = new JoystickButton(shootJoystick, Constants.rtButton);
     rtButtonS.whileHeld(new RunUptake(uptake, -Constants.uptakeSpeed));
 
     
@@ -132,7 +135,14 @@ public class RobotContainer
     JoystickButton ltButton = new JoystickButton(driver, Constants.ltButton);
     ltButton.whileHeld(new RunIntake(intake, -Constants.intakeSpeed));
 
-    
+    //climb
+    JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
+    rbButton.whileHeld(new Climb(climber, Constants.climbSpeed));
+
+    JoystickButton lbButton = new JoystickButton(driver, Constants.lbButton);
+    lbButton.whileHeld(new Climb(climber, -Constants.climbSpeed));
+
+
   }
 
   /**

@@ -47,9 +47,11 @@ public final class Constants
     /*****************OTHER*****************/
     public static final double uptakeSpeed = .25;
     public static final double intakeSpeed = .50;
+    public static final double climbSpeed = .5;
     public static final double kp = .025;
     public static final double minCommand = .03;
     public static final double kd = .05;
+    //shooting speeds
     public static final double highSpeedShoot = .6;
     public static final double midSpeedShoot = .42;
     public static final double lowSpeedShoot = .32;
