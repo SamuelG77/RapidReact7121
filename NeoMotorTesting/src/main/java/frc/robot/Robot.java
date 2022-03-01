@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -26,6 +27,7 @@ public class Robot extends TimedRobot
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private CANSparkMax motor;
   private Joystick j;
+  private RelativeEncoder encoder;
   
 
   /**
@@ -37,8 +39,9 @@ public class Robot extends TimedRobot
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    motor = new CANSparkMax(2,CANSparkMaxLowLevel.MotorType.kBrushless);
+    motor = new CANSparkMax(10,CANSparkMaxLowLevel.MotorType.kBrushless);
     j = new Joystick(0);
+    encoder = motor.getEncoder();
   
   }
 
@@ -98,6 +101,7 @@ public class Robot extends TimedRobot
     
       motor.set(.5);
     }
+    System.out.println(encoder.getPosition());
   }
 
   /** This function is called once when the robot is disabled. */

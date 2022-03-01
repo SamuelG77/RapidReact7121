@@ -57,6 +57,7 @@ public final class Constants
     public static final double lowSpeedShoot = .32;
     public static final double onePointUpper = .2;
     public static final double onePointLower = .2;
+    public static final double climbMax = -1200;
 
 
 }
