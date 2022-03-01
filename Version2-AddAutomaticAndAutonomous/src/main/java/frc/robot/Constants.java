@@ -41,13 +41,13 @@ public final class Constants
     public static final int uptake = 1;
     public static final int intake = 0;
     //SparkMax
-    public static final int rightClimb = 1;
-    public static final int leftClimb = 2;
+    public static final int rightClimb = 20;
+    public static final int leftClimb = 10;
 
     /*****************OTHER*****************/
     public static final double uptakeSpeed = .25;
     public static final double intakeSpeed = .50;
-    public static final double climbSpeed = .5;
+    public static final double climbSpeed = -.5;
     public static final double kp = .025;
     public static final double minCommand = .03;
     public static final double kd = .05;
