@@ -34,7 +34,7 @@ public class AutoShoot extends CommandBase
     {
       shooter.Shoot(Constants.midSpeedShoot, Constants.midSpeedShoot);
     }
-    else// if(y < 10)
+    else
     {
       shooter.Shoot(Constants.lowSpeedShoot, Constants.lowSpeedShoot);
     }

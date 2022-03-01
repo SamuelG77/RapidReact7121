@@ -25,6 +25,8 @@ public class AutoOne extends CommandBase
   private Intake intake;
   private Limelight limelight;
 
+  private boolean hasRan;
+
   public AutoOne() 
   {
     shooter = RobotContainer.shooter;
@@ -34,6 +36,7 @@ public class AutoOne extends CommandBase
     intake = RobotContainer.intake;
     limelight = RobotContainer.limelight;
     timer = new Timer();
+    hasRan = false;
 
     addRequirements(uptake, shooter, lift);
   }
@@ -46,60 +49,62 @@ public class AutoOne extends CommandBase
   public void execute() 
   {
 
-    //shoot first ball
-    timer.start();
-    while(timer.get()<1)
+    if(!hasRan)
     {
-      shooter.Shoot(.33, .33);
+      //shoot first ball
+      timer.start();
+      while(timer.get()<1)
+      {
+        shooter.Shoot(.33, .33);
+      }
+      while(timer.get()<3)
+      {
+        uptake.setSpeed(.5);
+      }
+      shooter.Shoot(0, 0);
+      uptake.setSpeed(0);
+      lift.Toggle();
+
+      //pick up next ball
+      driveTrain.ResetEncoder();
+      intake.setSpeed(.5);
+
+      while(driveTrain.getRightEncoder() < 170000 && driveTrain.getLeftEncoder() < 170000)
+      {
+        driveTrain.setSpeed(.5, .5);
+        System.out.println(driveTrain.getLeftEncoder() + "  " + driveTrain.getRightEncoder());
+      }
+      driveTrain.setSpeed(0, 0);
+
+      timer.reset();
+      timer.start();
+      
+      //auto aim
+      while(timer.get() < .5)
+      {
+        driveTrain.setSpeed(-limelight.PID(), limelight.PID());
+      }
+
+      intake.setSpeed(0);
+
+      timer.reset();
+      timer.start();
+
+      driveTrain.setSpeed(0, 0);
+
+      //shoot second ba;;
+      while(timer.get()<1)
+      {
+        shooter.Shoot(.42, .42);
+      }
+      while(timer.get()<3)
+      {
+        uptake.setSpeed(.5);
+      }
+      shooter.Shoot(0, 0);
+      uptake.setSpeed(0);
+      hasRan = true;
     }
-    while(timer.get()<3)
-    {
-      uptake.setSpeed(.5);
-    }
-    shooter.Shoot(0, 0);
-    uptake.setSpeed(0);
-    lift.Toggle();
-
-    //pick up next ball
-    driveTrain.ResetEncoder();
-    intake.setSpeed(.5);
-
-    while(driveTrain.getRightEncoder() < 170000 && driveTrain.getLeftEncoder() < 170000)
-    {
-      driveTrain.setSpeed(.5, .5);
-      System.out.println(driveTrain.getLeftEncoder() + "  " + driveTrain.getRightEncoder());
-    }
-    driveTrain.setSpeed(0, 0);
-
-    timer.reset();
-    timer.start();
-    
-    //auto aim
-    while(timer.get() < .5)
-    {
-      driveTrain.setSpeed(-limelight.PID(), limelight.PID());
-    }
-
-    intake.setSpeed(0);
-
-    timer.reset();
-    timer.start();
-
-    driveTrain.setSpeed(0, 0);
-
-    //shoot second ba;;
-    while(timer.get()<1)
-    {
-      shooter.Shoot(.42, .42);
-    }
-    while(timer.get()<3)
-    {
-      uptake.setSpeed(.5);
-    }
-    shooter.Shoot(0, 0);
-    uptake.setSpeed(0);
-
-    end(true);
 
 
     
