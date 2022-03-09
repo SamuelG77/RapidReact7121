@@ -12,10 +12,13 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Center;
 import frc.robot.commands.Climb;
+import frc.robot.commands.LeftClimb;
+import frc.robot.commands.RightClimb;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunUptake;
 import frc.robot.commands.Shoot;
@@ -28,6 +31,7 @@ import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Uptake;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -74,6 +78,7 @@ public class RobotContainer
     lift = new Lift();
     gearBox = new GearBox();
     limelight = new Limelight();
+    climber = new Climber();
 
     //commands
     drive = new ArcadeDrive(driveTrain);
@@ -83,7 +88,8 @@ public class RobotContainer
     driveTrain.setDefaultCommand(drive);
 
     SmartDashboard.getEntry("stream");
-
+    CameraServer.startAutomaticCapture(0);
+    CameraServer.startAutomaticCapture(1);
 
     configureButtonBindings();
 
@@ -138,9 +144,15 @@ public class RobotContainer
     //climb
     JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
     rbButton.whileHeld(new Climb(climber, Constants.climbSpeed));
-
+  
     JoystickButton lbButton = new JoystickButton(driver, Constants.lbButton);
     lbButton.whileHeld(new Climb(climber, -Constants.climbSpeed));
+
+    JoystickButton startButton = new JoystickButton(driver, Constants.startButton);
+    startButton.whileHeld(new RightClimb(climber, -Constants.climbSpeed));
+
+    JoystickButton backButton = new JoystickButton(driver, Constants.backButton);
+    backButton.whileHeld(new LeftClimb(climber, -Constants.climbSpeed));
 
 
   }
@@ -152,6 +164,6 @@ public class RobotContainer
    */
   public Command getAutonomousCommand() 
   {
-    return auto;
+    return new AutoOne();
   }
 }

@@ -4,18 +4,23 @@
 
 package frc.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class GearBox extends SubsystemBase 
 {
   private DoubleSolenoid gearBox;
+  private Timer timer;
   
   public GearBox() 
   {
     gearBox = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,0,1);
     gearBox.set(DoubleSolenoid.Value.kReverse);
+    timer = new Timer();
+    timer.start();
   }
 
   @Override
@@ -25,6 +30,11 @@ public class GearBox extends SubsystemBase
 
   public void Toggle()
   {
-    gearBox.toggle();
+    if(timer.get() <= .5)
+    {
+      gearBox.toggle();
+    }
+    timer.reset();
+    timer.start();
   }
 }

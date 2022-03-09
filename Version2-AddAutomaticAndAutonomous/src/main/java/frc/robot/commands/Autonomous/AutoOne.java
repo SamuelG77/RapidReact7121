@@ -51,11 +51,14 @@ public class AutoOne extends CommandBase
 
     if(!hasRan)
     {
+      
+      lift.setFor();
+
       //shoot first ball
       timer.start();
-      while(timer.get()<1)
+      while(timer.get()<2)
       {
-        shooter.Shoot(.33, .33);
+        shooter.Shoot(.35, .35);
       }
       while(timer.get()<3)
       {
@@ -63,7 +66,6 @@ public class AutoOne extends CommandBase
       }
       shooter.Shoot(0, 0);
       uptake.setSpeed(0);
-      lift.Toggle();
 
       //pick up next ball
       driveTrain.ResetEncoder();
@@ -76,11 +78,19 @@ public class AutoOne extends CommandBase
       }
       driveTrain.setSpeed(0, 0);
 
+      
+
+      while(driveTrain.getRightEncoder() < 10000 && driveTrain.getLeftEncoder() < 10000)
+      {
+        driveTrain.setSpeed(-.5, -.5);
+        System.out.println(driveTrain.getLeftEncoder() + "  " + driveTrain.getRightEncoder());
+      }
+
       timer.reset();
       timer.start();
-      
+
       //auto aim
-      while(timer.get() < .5)
+      while(timer.get() < 3)
       {
         driveTrain.setSpeed(-limelight.PID(), limelight.PID());
       }
@@ -95,7 +105,7 @@ public class AutoOne extends CommandBase
       //shoot second ba;;
       while(timer.get()<1)
       {
-        shooter.Shoot(.42, .42);
+        shooter.Shoot(.38, .38);
       }
       while(timer.get()<3)
       {

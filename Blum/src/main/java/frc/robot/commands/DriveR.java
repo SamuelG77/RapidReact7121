@@ -5,37 +5,37 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveTrain;
 
-public class Climb extends CommandBase 
+public class DriveR extends CommandBase 
 {
 
-  private double speed;
-  private Climber climber;
-
-  public Climb(Climber climber, double speed) 
+  private DriveTrain driveTrain;
+  public DriveR(DriveTrain dt) 
   {
-    this.climber = climber;
-    this.speed = speed;
-
-    addRequirements(climber);
+    driveTrain = dt;
+    addRequirements(driveTrain);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-    climber.RunMotors(speed);
+    driveTrain.Drive();
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    climber.RunMotors(0);
+    driveTrain.Stop();
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

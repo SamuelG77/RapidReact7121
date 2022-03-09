@@ -78,7 +78,7 @@ public class DriveTrain extends SubsystemBase
 
 
     //deadzone for joysticks
-    if(rSpeed >.02 || lSpeed > .02 || rSpeed < -.02 || lSpeed < -.02 )
+    if(rSpeed >.03 || lSpeed > .03 || rSpeed < -.03 || lSpeed < -.03)
       drive = true;
     else
     {
@@ -89,11 +89,11 @@ public class DriveTrain extends SubsystemBase
     //intake front
     if(drive && isInverted)
     {
-      setSpeed(invertLSpeed, invertRSpeed);
+      setSpeed(invertLSpeed * .9, invertRSpeed * .9);
     }
     else if(drive)//shooter front
     {
-      setSpeed(lSpeed, rSpeed);
+      setSpeed(lSpeed * .9, rSpeed * .9);
     }
   }
 
