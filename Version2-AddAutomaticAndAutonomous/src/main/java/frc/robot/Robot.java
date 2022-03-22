@@ -96,11 +96,11 @@ public class Robot extends TimedRobot {
       RobotContainer.lift.Toggle();
     }
 
-    //shift
-    if(RobotContainer.driver.getRawButton(Constants.bButton))
-    {
-      RobotContainer.gearBox.Toggle();
-    }
+    // //shift
+    // if(RobotContainer.driver.getRawButton(Constants.bButton))
+    // {
+    //   RobotContainer.gearBox.Toggle();
+    // }
   }
 
   @Override

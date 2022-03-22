@@ -4,53 +4,45 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Limelight;
+import frc.robot.Constants;
+import frc.robot.subsystems.Joint;
 
-public class Center extends CommandBase 
+public class RotateJoint extends CommandBase 
 {
-  private Limelight limelight;
-  private DriveTrain driveTrain;
-  private double motorSpeed;
-  /** Creates a new Center. */
-  public Center(Limelight ll, DriveTrain dt) 
+
+  private Joint joint;
+  private Joystick joystick;
+  public RotateJoint(Joint j, Joystick joy) 
   {
-    limelight = ll;
-    driveTrain = dt;
-    addRequirements(limelight);
-    addRequirements(driveTrain);
+    joint = j;
+    joystick = joy;
+    addRequirements(joint);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() 
-  {
-
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-    motorSpeed = limelight.PID();
-    driveTrain.setSpeed(motorSpeed, -motorSpeed);
-
+    joint.MoveRightJoint(joystick.getRawAxis(Constants.rightY));
+    joint.MoveLeftJoint(joystick.getRawAxis(Constants.leftY));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    driveTrain.setSpeed(0, 0);
+    joint.Stop();
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() 
-  {
+  public boolean isFinished() {
     return false;
   }
-  
 }

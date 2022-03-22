@@ -41,12 +41,12 @@ public class Climber extends SubsystemBase
 
   public void RunMotors(double speed)
   {
-    // if(speed > 0 && !rightLimit.get())
+    // if(speed > 0)
     // {
     //   rightArm.set(speed);
     //   leftArm.set(speed);
     // }
-    // else if(speed < 0)
+    // else if(speed < 0 && !rightLimit.get())
     // {
     //   rightArm.set(speed);
     //   leftArm.set(speed);

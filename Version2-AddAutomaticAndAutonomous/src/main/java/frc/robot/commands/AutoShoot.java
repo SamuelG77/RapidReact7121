@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
@@ -13,11 +14,13 @@ public class AutoShoot extends CommandBase
 {
   private Limelight limelight;
   private Shooter shooter;
-  public AutoShoot(Limelight ll, Shooter s) 
+  private DriveTrain driveTrain;
+  public AutoShoot(Limelight ll, Shooter s, DriveTrain dt) 
   {
     limelight = ll;
     shooter = s;
-    addRequirements(limelight, shooter);
+    driveTrain = dt;
+    addRequirements(limelight, shooter, driveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -28,15 +31,30 @@ public class AutoShoot extends CommandBase
   @Override
   public void execute() 
   {
+    double motorSpeed = limelight.PID();
+    driveTrain.setSpeed(motorSpeed, -motorSpeed);
+
     double y = limelight.getY();
     
-    if(y < -10)
+    if(y > 7)
     {
-      shooter.Shoot(Constants.midSpeedShoot, Constants.midSpeedShoot);
+      shooter.Shoot(.35, .35);
+    }
+    else if(y > 4)
+    {
+      shooter.Shoot(.39, .39);
+    }
+    if(y > 3)
+    {
+      shooter.Shoot(.42, .42);
+    }
+    else if(y > 2)
+    {
+      shooter.Shoot(.44, .44);
     }
     else
     {
-      shooter.Shoot(Constants.lowSpeedShoot, Constants.lowSpeedShoot);
+      shooter.Shoot(0, 0);
     }
     System.out.println(limelight.getY());
   }

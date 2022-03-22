@@ -22,12 +22,12 @@ public class DriveTrain extends SubsystemBase
   private MotorControllerGroup rightSide;
   private MotorControllerGroup leftSide;
 
-  private boolean isInverted;
+  private boolean isNotInverted;
   private Timer timer;
 
   public DriveTrain() 
   {
-    isInverted = true;
+    isNotInverted = true;
     timer = new Timer();
     timer.reset();
     timer.start();
@@ -60,7 +60,7 @@ public class DriveTrain extends SubsystemBase
     
     if(timer.get() > .5)
     {
-      isInverted = !isInverted;
+      isNotInverted = !isNotInverted;
       timer.reset();
       timer.start();
     }
@@ -70,10 +70,10 @@ public class DriveTrain extends SubsystemBase
   {
     double x = RobotContainer.driver.getRawAxis(Constants.rightX);
     double y = RobotContainer.driver.getRawAxis(Constants.rightY);
-    double lSpeed = y - x;
-    double rSpeed = y + x;
-    double invertRSpeed = -(y - x);
-    double invertLSpeed = -(y + x);
+    double lSpeed = y + x;
+    double rSpeed = y - x;
+    double invertLSpeed = -(y - x);
+    double invertRSpeed = -(y + x);
     boolean drive = false;
 
 
@@ -87,7 +87,7 @@ public class DriveTrain extends SubsystemBase
     }
 
     //intake front
-    if(drive && isInverted)
+    if(drive && isNotInverted)
     {
       setSpeed(invertLSpeed * .9, invertRSpeed * .9);
     }

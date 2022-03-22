@@ -9,7 +9,7 @@ public final class Constants
 {
     /*****************Joystick map*****************/
     public static final int driverJoystick = 0;
-    public static final int shooterJoystick = 1;
+    public static final int secondJoystick = 1;
     //axis
     public static final int leftX = 0;
     public static final int leftY = 1;
@@ -31,15 +31,17 @@ public final class Constants
 
     /*****************CAN*****************/
     //TalonFX
-    public static final int rightFront = 6;
-    public static final int rightFollow = 7;
-    public static final int leftFront = 4;
-    public static final int leftFollow = 5;
+    public static final int rightFront = 4;
+    public static final int rightFollow = 5;
+    public static final int leftFront = 6;
+    public static final int leftFollow = 7;
     public static final int lowerFlyWheel = 3;
     public static final int upperFlyWheel = 2;
     //victorSPX
     public static final int uptake = 1;
     public static final int intake = 0;
+    public static final int rightJoint = 15;
+    public static final int leftJoint = 16;
     //SparkMax
     public static final int rightClimb = 20;
     public static final int leftClimb = 10;
@@ -48,8 +50,8 @@ public final class Constants
     public static final double uptakeSpeed = .25;
     public static final double intakeSpeed = .50;
     public static final double climbSpeed = 1;
-    public static final double kp = .025;
-    public static final double minCommand = .03;
+    public static final double kp = .01;
+    public static final double minCommand = .012;
     public static final double kd = .05;
     public static final int rightLimitSwitch = 0;
     public static final int leftLimitSwitch = 1;

@@ -19,6 +19,7 @@ import frc.robot.commands.Center;
 import frc.robot.commands.Climb;
 import frc.robot.commands.LeftClimb;
 import frc.robot.commands.RightClimb;
+import frc.robot.commands.RotateJoint;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunUptake;
 import frc.robot.commands.Shoot;
@@ -27,6 +28,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.GearBox;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Joint;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -44,7 +46,7 @@ public class RobotContainer
 
   //other
   public static Joystick driver;
-  public static Joystick shootJoystick;
+  public static Joystick second;
   private Timer timer;
 
   //subsystems
@@ -56,17 +58,18 @@ public class RobotContainer
   public static Intake intake;
   public static Limelight limelight;
   public static Climber climber;
+  private Joint joint;
 
   //commands
   private ArcadeDrive drive;
-  private AutoOne auto;
+  private RotateJoint rotate;
 
   public RobotContainer() 
   {
 
     //other
     driver = new Joystick(Constants.driverJoystick);
-    shootJoystick = new Joystick(Constants.shooterJoystick);
+    second = new Joystick(Constants.secondJoystick);
     timer = new Timer();
     timer.reset();
 
@@ -79,13 +82,15 @@ public class RobotContainer
     gearBox = new GearBox();
     limelight = new Limelight();
     climber = new Climber();
+    joint = new Joint();
 
     //commands
     drive = new ArcadeDrive(driveTrain);
-    auto = new AutoOne();
+    rotate = new RotateJoint(joint, second);
 
     //default commands
     driveTrain.setDefaultCommand(drive);
+    joint.setDefaultCommand(rotate);
 
     SmartDashboard.getEntry("stream");
     CameraServer.startAutomaticCapture(0);
@@ -105,33 +110,33 @@ public class RobotContainer
   private void configureButtonBindings() 
   {
 
-    //shoot (shooter joystick)
-    JoystickButton xButtonS = new JoystickButton(shootJoystick, Constants.xButton);
-    xButtonS.whileHeld(new Shoot(shooter, Constants.lowSpeedShoot, Constants.lowSpeedShoot));
+    //shoot
+    // JoystickButton xButton = new JoystickButton(driver, Constants.xButton);
+    // xButton.whileHeld(new Shoot(shooter, Constants.lowSpeedShoot, Constants.lowSpeedShoot));
 
-    JoystickButton bButtonS = new JoystickButton(shootJoystick, Constants.bButton);
-    bButtonS.whileHeld(new Shoot(shooter, Constants.midSpeedShoot, Constants.midSpeedShoot));
+    // JoystickButton bButton = new JoystickButton(driver, Constants.bButton);
+    // bButton.whileHeld(new Shoot(shooter, Constants.midSpeedShoot, Constants.midSpeedShoot));
 
-    JoystickButton yButtonS = new JoystickButton(shootJoystick, Constants.yButton);
-    yButtonS.whileHeld(new Shoot(shooter, Constants.highSpeedShoot, Constants.highSpeedShoot));
+    // JoystickButton yButton = new JoystickButton(driver, Constants.yButton);
+    // yButton.whileHeld(new Shoot(shooter, Constants.highSpeedShoot, Constants.highSpeedShoot));
 
-    JoystickButton aButtonS = new JoystickButton(shootJoystick, Constants.aButton);
-    aButtonS.whileHeld(new Shoot(shooter, Constants.onePointUpper, Constants.onePointLower));
+    JoystickButton xButton = new JoystickButton(driver, Constants.xButton);
+    xButton.whileHeld(new Shoot(shooter, Constants.onePointUpper, Constants.onePointLower));
 
-    JoystickButton r3ButtonS = new JoystickButton(shootJoystick, Constants.r3Button);
-    r3ButtonS.whileHeld(new AutoShoot(limelight, shooter));
+    JoystickButton r3Button = new JoystickButton(driver, Constants.r3Button);
+    r3Button.whileHeld(new AutoShoot(limelight, shooter, driveTrain));
 
     //limelight
-    JoystickButton ltButtonS = new JoystickButton(shootJoystick, Constants.ltButton);
-    ltButtonS.whileHeld(new Center(limelight, driveTrain));
+    JoystickButton l3Button = new JoystickButton(driver, Constants.l3Button);
+    l3Button.whileHeld(new Center(limelight, driveTrain));
 
 
     //uptake
-    JoystickButton rbButtonS = new JoystickButton(shootJoystick, Constants.rbButton);
-    rbButtonS.whileHeld(new RunUptake(uptake, Constants.uptakeSpeed));
+    JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
+    rbButton.whileHeld(new RunUptake(uptake, Constants.uptakeSpeed));
 
-    JoystickButton rtButtonS = new JoystickButton(shootJoystick, Constants.rtButton);
-    rtButtonS.whileHeld(new RunUptake(uptake, -Constants.uptakeSpeed));
+    JoystickButton lbButton = new JoystickButton(driver, Constants.lbButton);
+    lbButton.whileHeld(new RunUptake(uptake, -Constants.uptakeSpeed));
 
     
     //intake
@@ -142,17 +147,17 @@ public class RobotContainer
     ltButton.whileHeld(new RunIntake(intake, -Constants.intakeSpeed));
 
     //climb
-    JoystickButton rbButton = new JoystickButton(driver, Constants.rbButton);
-    rbButton.whileHeld(new Climb(climber, Constants.climbSpeed));
+    JoystickButton rbButtonS = new JoystickButton(second, Constants.rbButton);
+    rbButtonS.whileHeld(new RightClimb(climber, Constants.climbSpeed));
   
-    JoystickButton lbButton = new JoystickButton(driver, Constants.lbButton);
-    lbButton.whileHeld(new Climb(climber, -Constants.climbSpeed));
+    JoystickButton lbButtonS = new JoystickButton(second, Constants.lbButton);
+    lbButtonS.whileHeld(new LeftClimb(climber, Constants.climbSpeed));
 
-    JoystickButton startButton = new JoystickButton(driver, Constants.startButton);
-    startButton.whileHeld(new RightClimb(climber, -Constants.climbSpeed));
+    JoystickButton rtButtonS = new JoystickButton(second, Constants.rtButton);
+    rtButtonS.whileHeld(new RightClimb(climber, -Constants.climbSpeed));
 
-    JoystickButton backButton = new JoystickButton(driver, Constants.backButton);
-    backButton.whileHeld(new LeftClimb(climber, -Constants.climbSpeed));
+    JoystickButton ltButtonS = new JoystickButton(second, Constants.ltButton);
+    ltButtonS.whileHeld(new LeftClimb(climber, -Constants.climbSpeed));
 
 
   }
