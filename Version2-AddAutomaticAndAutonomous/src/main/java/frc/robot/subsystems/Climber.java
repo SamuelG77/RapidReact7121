@@ -57,17 +57,17 @@ public class Climber extends SubsystemBase
     //   leftArm.set(0);
     // }
 
-    rightArm.set(speed);
-    leftArm.set(speed);
+    rightArm.set(-speed);
+    leftArm.set(-speed);
     
   }
   public void RightMotor(double speed)
   {
-    rightArm.set(speed);
+    rightArm.set(-speed);
   }
 
   public void LeftMotor(double speed)
   {
-    leftArm.set(speed);
+    leftArm.set(-speed);
   }
 }

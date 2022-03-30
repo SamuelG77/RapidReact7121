@@ -18,6 +18,8 @@ public class Joint extends SubsystemBase
   {
     rightJoint = new WPI_VictorSPX(Constants.rightJoint);
     leftJoint = new WPI_VictorSPX(Constants.leftJoint);
+    rightJoint.setInverted(true);
+
   }
 
   @Override

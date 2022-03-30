@@ -29,8 +29,8 @@ public class RotateJoint extends CommandBase
   @Override
   public void execute() 
   {
-    joint.MoveRightJoint(joystick.getRawAxis(Constants.rightY));
-    joint.MoveLeftJoint(joystick.getRawAxis(Constants.leftY));
+    joint.MoveRightJoint(joystick.getRawAxis(Constants.leftY)/2.5);
+    joint.MoveLeftJoint(joystick.getRawAxis(Constants.rightY)/2.5);
   }
 
   // Called once the command ends or is interrupted.

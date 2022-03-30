@@ -43,12 +43,12 @@ public final class Constants
     public static final int rightJoint = 15;
     public static final int leftJoint = 16;
     //SparkMax
-    public static final int rightClimb = 20;
-    public static final int leftClimb = 10;
+    public static final int rightClimb = 10;
+    public static final int leftClimb = 20;
 
     /*****************OTHER*****************/
     public static final double uptakeSpeed = .25;
-    public static final double intakeSpeed = .50;
+    public static final double intakeSpeed = .40;
     public static final double climbSpeed = 1;
     public static final double kp = .01;
     public static final double minCommand = .012;
@@ -59,7 +59,13 @@ public final class Constants
     public static final double highSpeedShoot = .6;
     public static final double midSpeedShoot = .42;
     public static final double lowSpeedShoot = .32;
-    public static final double onePointUpper = .2;
-    public static final double onePointLower = .2;
+    public static final double onePointUpper = .22;
+    public static final double onePointLower = .22;
+    public static final double autoLevel1 = .35;
+    public static final double autoLevel2 = .39;
+    public static final double autoLevel3 = .42;
+    public static final double autoLevel4 = .44;
+
+
 
 }

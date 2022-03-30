@@ -148,16 +148,22 @@ public class RobotContainer
 
     //climb
     JoystickButton rbButtonS = new JoystickButton(second, Constants.rbButton);
-    rbButtonS.whileHeld(new RightClimb(climber, Constants.climbSpeed));
+    rbButtonS.whileHeld(new LeftClimb(climber, Constants.climbSpeed));
   
     JoystickButton lbButtonS = new JoystickButton(second, Constants.lbButton);
-    lbButtonS.whileHeld(new LeftClimb(climber, Constants.climbSpeed));
+    lbButtonS.whileHeld(new RightClimb(climber, Constants.climbSpeed));
 
     JoystickButton rtButtonS = new JoystickButton(second, Constants.rtButton);
-    rtButtonS.whileHeld(new RightClimb(climber, -Constants.climbSpeed));
+    rtButtonS.whileHeld(new LeftClimb(climber, -Constants.climbSpeed));
 
     JoystickButton ltButtonS = new JoystickButton(second, Constants.ltButton);
-    ltButtonS.whileHeld(new LeftClimb(climber, -Constants.climbSpeed));
+    ltButtonS.whileHeld(new RightClimb(climber, -Constants.climbSpeed));
+
+    JoystickButton yButtonS = new JoystickButton(second, Constants.yButton);
+    yButtonS.whileHeld(new Climb(climber, Constants.climbSpeed));
+
+    JoystickButton aButtonS = new JoystickButton(second, Constants.aButton);
+    aButtonS.whileHeld(new Climb(climber, -Constants.climbSpeed));
 
 
   }

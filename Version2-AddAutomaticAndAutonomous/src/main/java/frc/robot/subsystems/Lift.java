@@ -20,7 +20,7 @@ public class Lift extends SubsystemBase
   public Lift() 
   {
     timer = new Timer();
-    lift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,2,3);
+    lift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,1,0);
     lift.set(DoubleSolenoid.Value.kReverse);
     isUp = true;
     timer.start();

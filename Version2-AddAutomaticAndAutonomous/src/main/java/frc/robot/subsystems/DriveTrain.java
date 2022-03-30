@@ -89,11 +89,11 @@ public class DriveTrain extends SubsystemBase
     //intake front
     if(drive && isNotInverted)
     {
-      setSpeed(invertLSpeed * .9, invertRSpeed * .9);
+      setSpeed(invertLSpeed * .85, invertRSpeed * .85);
     }
     else if(drive)//shooter front
     {
-      setSpeed(lSpeed * .9, rSpeed * .9);
+      setSpeed(lSpeed * .85, rSpeed * .85);
     }
   }
 

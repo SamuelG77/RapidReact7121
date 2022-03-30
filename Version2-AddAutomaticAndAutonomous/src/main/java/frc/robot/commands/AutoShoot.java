@@ -38,19 +38,19 @@ public class AutoShoot extends CommandBase
     
     if(y > 7)
     {
-      shooter.Shoot(.35, .35);
+      shooter.Shoot(.25, .25);
     }
     else if(y > 4)
     {
-      shooter.Shoot(.39, .39);
+      shooter.Shoot(.32, .33);
     }
-    if(y > 3)
+    if(y > 2.5)
     {
-      shooter.Shoot(.42, .42);
+      shooter.Shoot(.38, .39);
     }
-    else if(y > 2)
+    else if(y > -1)
     {
-      shooter.Shoot(.44, .44);
+      shooter.Shoot(.4, .41);
     }
     else
     {

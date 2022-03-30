@@ -17,7 +17,7 @@ public class GearBox extends SubsystemBase
   
   public GearBox() 
   {
-    gearBox = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,0,1);
+    gearBox = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,2,3);
     gearBox.set(DoubleSolenoid.Value.kReverse);
     timer = new Timer();
     timer.start();
